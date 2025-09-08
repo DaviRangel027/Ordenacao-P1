@@ -49,18 +49,18 @@ public class DataGenerator {
 
     public static void main(String[] args) {
         int[] sizes = {100000, 160000, 220000, 280000, 340000, 400000, 450000, 520000, 580000, 640000, 700000};
-        String outputFolder = "C:\\Users\\Arthur - Home\\Desktop\\Dados";
+        String outputFolder = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Entrada";
 
         try {
             for (int size : sizes) {
-                generateRandomData(outputFolder + "random_" + size + ".txt", size);
-                System.out.println("Arquivo 'random_" + size + ".txt' gerado.");
+                generateRandomData(outputFolder + " ALEATÓRIO_" + size + ".txt", size);
+                System.out.println("Arquivo 'ALEATÓRIO_" + size + ".txt' gerado.");
 
-                generateIncreasingData(outputFolder + "increasing_" + size + ".txt", size);
-                System.out.println("Arquivo 'increasing_" + size + ".txt' gerado.");
+                generateIncreasingData(outputFolder + " CRESCENTE_" + size + ".txt", size);
+                System.out.println("Arquivo 'CRESCENTE_" + size + ".txt' gerado.");
 
-                generateDecreasingData(outputFolder + "decreasing_" + size + ".txt", size);
-                System.out.println("Arquivo 'decreasing_" + size + ".txt' gerado.");
+                generateDecreasingData(outputFolder + " DECRESCENTE_" + size + ".txt", size);
+                System.out.println("Arquivo 'DECRESCENTE_" + size + ".txt' gerado.");
             }
             System.out.println("\nTodos os arquivos de entrada foram gerados com sucesso!");
         } catch (IOException e) {
