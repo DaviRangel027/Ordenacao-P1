@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+<<<<<<< HEAD
+=======
+import utils.FileUtils;
+>>>>>>> 658047ea0693f5b44e8ad40fc96a8229531344d3
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +13,11 @@ public class Main {
             // Solicita os três parâmetros conforme a especificação do trabalho
             System.out.println("Qual a quantidade de numeros a serem ordenados?");
             int quantidadeNumeros = scanner.nextInt();
+<<<<<<< HEAD
             scanner.nextLine();
+=======
+            scanner.nextLine(); // Consome a quebra de linha
+>>>>>>> 658047ea0693f5b44e8ad40fc96a8229531344d3
 
             System.out.println("Qual o nome do arquivo de entrada?");
             String inputFile = scanner.nextLine();
