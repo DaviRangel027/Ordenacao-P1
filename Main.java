@@ -11,7 +11,10 @@ import src.utils.DataGenerator;
 
 public class Main {
 
-    public static void clearScreen() {
+    /**
+     * Limpa a tela do console, funcionando tanto em sistemas Windows quanto em Unix.
+     */
+    public static void limparTela() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -19,14 +22,14 @@ public class Main {
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
             }
         } catch (IOException | InterruptedException ex) {
-            // Ignora erros de limpeza de console
+            // Ignora a exceção se a limpeza do console falhar
         }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String baseOutputFolder = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Saida\\";
-        String baseInputFolder = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Entrada\\";
+        String pastaSaidaBase = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Saida\\";
+        String pastaEntradaBase = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Entrada\\";
         boolean continuar = true;
 
         do {
@@ -34,7 +37,7 @@ public class Main {
                 int[] tamanhos = {100000, 160000, 220000, 280000, 340000, 400000, 450000, 520000, 580000, 640000, 700000};
                 String[] tipos = {"Aleatorio com repeticao", "Aleatorio sem repeticao", "Crescente com repeticao", "Crescente sem repeticao", "Decrescente com repeticao", "Decrescente sem repeticao"};
 
-                int tipoEscolha = 0;
+                int escolhaTipo = 0;
                 // Validação da escolha do tipo de dado
                 do {
                     System.out.println("Escolha o tipo de dado para a ordenacao:");
@@ -43,18 +46,18 @@ public class Main {
                     }
                     System.out.print("Digite o numero correspondente: ");
                     try {
-                        tipoEscolha = scanner.nextInt();
-                        if (tipoEscolha < 1 || tipoEscolha > tipos.length) {
+                        escolhaTipo = scanner.nextInt();
+                        if (escolhaTipo < 1 || escolhaTipo > tipos.length) {
                             System.out.println("Opcao invalida. Por favor, digite um numero entre 1 e " + tipos.length + ".");
                         }
                     } catch (InputMismatchException e) {
                         System.out.println("Entrada invalida. Por favor, digite apenas numeros.");
-                        scanner.next(); // Limpa o buffer do scanner
+                        scanner.next(); // Limpa o buffer
                     }
-                } while (tipoEscolha < 1 || tipoEscolha > tipos.length);
+                } while (escolhaTipo < 1 || escolhaTipo > tipos.length);
                 scanner.nextLine();
 
-                int tamanhoEscolha = 0;
+                int escolhaTamanho = 0;
                 // Validação da escolha da quantidade de números
                 do {
                     System.out.println("\nEscolha a quantidade de numeros a serem ordenados:");
@@ -63,151 +66,150 @@ public class Main {
                     }
                     System.out.print("Digite o numero correspondente: ");
                     try {
-                        tamanhoEscolha = scanner.nextInt();
-                        if (tamanhoEscolha < 1 || tamanhoEscolha > tamanhos.length) {
+                        escolhaTamanho = scanner.nextInt();
+                        if (escolhaTamanho < 1 || escolhaTamanho > tamanhos.length) {
                             System.out.println("Opcao invalida. Por favor, digite um numero entre 1 e " + tamanhos.length + ".");
                         }
                     } catch (InputMismatchException e) {
                         System.out.println("Entrada invalida. Por favor, digite apenas numeros.");
-                        scanner.next(); // Limpa o buffer do scanner
+                        scanner.next(); // Limpa o buffer
                     }
-                } while (tamanhoEscolha < 1 || tamanhoEscolha > tamanhos.length);
+                } while (escolhaTamanho < 1 || escolhaTamanho > tamanhos.length);
                 scanner.nextLine();
                 
-                clearScreen();
+                limparTela();
                 
-                String tipo = tipos[tipoEscolha - 1];
-                int tamanho = tamanhos[tamanhoEscolha - 1];
+                String tipo = tipos[escolhaTipo - 1];
+                int tamanho = tamanhos[escolhaTamanho - 1];
                 
-                String inputFolder = baseInputFolder + tipo.replace(" ", "") + File.separator + tamanho + File.separator;
-                String inputFilePath = inputFolder + "entrada.txt";
+                String pastaEntrada = pastaEntradaBase + tipo.replace(" ", "") + File.separator + tamanho + File.separator;
+                String caminhoArquivoEntrada = pastaEntrada + "entrada.txt";
                 
-                File inputDir = new File(inputFolder);
-                if (!inputDir.exists()) {
-                    inputDir.mkdirs();
+                File diretorioEntrada = new File(pastaEntrada);
+                if (!diretorioEntrada.exists()) {
+                    diretorioEntrada.mkdirs();
                 }
 
-                System.out.println("\nGerando arquivo de entrada: " + inputFilePath + " (Tamanho: " + tamanho + ", Tipo: " + tipo + ")");
+                System.out.println("\nGerando arquivo de entrada: " + caminhoArquivoEntrada + " (Tamanho: " + tamanho + ", Tipo: " + tipo + ")");
                 
                 switch (tipo) {
                     case "Aleatorio com repeticao":
-                        DataGenerator.generateRandomData(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosAleatorios(caminhoArquivoEntrada, tamanho);
                         break;
                     case "Aleatorio sem repeticao":
-                        DataGenerator.generateRandomUniqueData(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosAleatoriosUnicos(caminhoArquivoEntrada, tamanho);
                         break;
                     case "Crescente sem repeticao":
-                        DataGenerator.generateIncreasingData(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosCrescentes(caminhoArquivoEntrada, tamanho);
                         break;
                     case "Crescente com repeticao":
-                        DataGenerator.generateIncreasingDataWithRepetition(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosCrescentesComRepeticao(caminhoArquivoEntrada, tamanho);
                         break;
                     case "Decrescente sem repeticao":
-                        DataGenerator.generateDecreasingData(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosDecrescentes(caminhoArquivoEntrada, tamanho);
                         break;
                     case "Decrescente com repeticao":
-                        DataGenerator.generateDecreasingDataWithRepetition(inputFilePath, tamanho);
+                        DataGenerator.gerarDadosDecrescentesComRepeticao(caminhoArquivoEntrada, tamanho);
                         break;
                 }
 
-                ArrayList<Integer> originalNumbers = FileUtils.readNumbersFromFile(inputFilePath);
-                if (originalNumbers.isEmpty()) {
+                ArrayList<Integer> numerosOriginais = FileUtils.lerNumerosDoArquivo(caminhoArquivoEntrada);
+                if (numerosOriginais.isEmpty()) {
                     System.err.println("Nenhum numero foi lido do arquivo de entrada.");
                     return;
                 }
 
-                System.out.println("\n--- Executando Algoritmos para " + originalNumbers.size() + " numeros (" + tipo + ") ---");
+                System.out.println("\n--- Executando Algoritmos para " + numerosOriginais.size() + " numeros (" + tipo + ") ---");
                 
-                Map<String, String> algorithms = new LinkedHashMap<>();
-                algorithms.put("Bubble Sort", "BubbleSort");
-                algorithms.put("Selection Sort", "SelectionSort");
-                algorithms.put("Insertion Sort", "InsertionSort");
-                algorithms.put("Merge Sort", "MergeSort");
-                algorithms.put("Quick Sort", "QuickSort");
-                algorithms.put("Heap Sort", "HeapSort");
+                Map<String, String> algoritmos = new LinkedHashMap<>();
+                algoritmos.put("Bubble Sort", "BubbleSort");
+                algoritmos.put("Selection Sort", "SelectionSort");
+                algoritmos.put("Insertion Sort", "InsertionSort");
+                algoritmos.put("Merge Sort", "MergeSort");
+                algoritmos.put("Quick Sort", "QuickSort");
+                algoritmos.put("Heap Sort", "HeapSort");
 
-                for (Map.Entry<String, String> entry : algorithms.entrySet()) {
-                    String algoName = entry.getKey();
-                    String algoClass = entry.getValue();
-                    long totalDurationMs = 0;
-                    int numRuns = 3; 
+                for (Map.Entry<String, String> entrada : algoritmos.entrySet()) {
+                    String nomeAlgo = entrada.getKey();
+                    String classeAlgo = entrada.getValue();
+                    long duracaoTotalMs = 0;
+                    int numExecucoes = 3; 
 
-                    for (int run = 0; run < numRuns; run++) {
-                        ArrayList<Integer> numbersForSort = new ArrayList<>(originalNumbers);
+                    for (int execucao = 0; execucao < numExecucoes; execucao++) {
+                        ArrayList<Integer> numerosParaOrdenar = new ArrayList<>(numerosOriginais);
 
-                        long startTime = System.nanoTime();
+                        long tempoInicio = System.nanoTime();
                         
-                        switch (algoClass) {
+                        switch (classeAlgo) {
                             case "BubbleSort":
-                                BubbleSort.sort(numbersForSort);
+                                BubbleSort.sort(numerosParaOrdenar);
                                 break;
                             case "SelectionSort":
-                                SelectionSort.sort(numbersForSort);
+                                SelectionSort.sort(numerosParaOrdenar);
                                 break;
                             case "InsertionSort":
-                                InsertionSort.sort(numbersForSort);
+                                InsertionSort.sort(numerosParaOrdenar);
                                 break;
                             case "MergeSort":
-                                MergeSort.sort(numbersForSort);
+                                MergeSort.sort(numerosParaOrdenar);
                                 break;
                             case "QuickSort":
-                                QuickSort.sort(numbersForSort);
+                                QuickSort.sort(numerosParaOrdenar);
                                 break;
                             case "HeapSort":
-                                HeapSort.sort(numbersForSort);
+                                HeapSort.sort(numerosParaOrdenar);
                                 break;
                         }
 
-                        long endTime = System.nanoTime();
-                        long durationMs = (endTime - startTime) / 1000000;
-                        totalDurationMs += durationMs;
+                        long tempoFim = System.nanoTime();
+                        long duracaoMs = (tempoFim - tempoInicio) / 1000000;
+                        duracaoTotalMs += duracaoMs;
                     }
                     
-                    long averageDurationMs = totalDurationMs / numRuns;
-                    System.out.println(algoName + ": Tempo medio de execucao (ms) = " + averageDurationMs);
+                    long duracaoMediaMs = duracaoTotalMs / numExecucoes;
+                    System.out.println(nomeAlgo + ": Tempo medio de execucao (ms) = " + duracaoMediaMs);
                     
-                    String outputFolder = baseOutputFolder + algoClass + File.separator + tipo.replace(" ", "") + File.separator + tamanho + File.separator;
-                    String outputFilePath = outputFolder + "saida.txt";
+                    String pastaSaida = pastaSaidaBase + classeAlgo + File.separator + tipo.replace(" ", "") + File.separator + tamanho + File.separator;
+                    String caminhoArquivoSaida = pastaSaida + "saida.txt";
                     
-                    File outputDir = new File(outputFolder);
-                    if (!outputDir.exists()) {
-                        outputDir.mkdirs();
+                    File diretorioSaida = new File(pastaSaida);
+                    if (!diretorioSaida.exists()) {
+                        diretorioSaida.mkdirs();
                     }
                     
-                    ArrayList<Integer> numbersForSave = new ArrayList<>(originalNumbers);
-                    switch (algoClass) {
+                    ArrayList<Integer> numerosParaSalvar = new ArrayList<>(numerosOriginais);
+                    switch (classeAlgo) {
                         case "BubbleSort":
-                            BubbleSort.sort(numbersForSave);
+                            BubbleSort.sort(numerosParaSalvar);
                             break;
                         case "SelectionSort":
-                            SelectionSort.sort(numbersForSave);
+                            SelectionSort.sort(numerosParaSalvar);
                             break;
                         case "InsertionSort":
-                            InsertionSort.sort(numbersForSave);
+                            InsertionSort.sort(numerosParaSalvar);
                             break;
                         case "MergeSort":
-                            MergeSort.sort(numbersForSave);
+                            MergeSort.sort(numerosParaSalvar);
                             break;
                         case "QuickSort":
-                            QuickSort.sort(numbersForSave);
+                            QuickSort.sort(numerosParaSalvar);
                             break;
                         case "HeapSort":
-                            HeapSort.sort(numbersForSave);
+                            HeapSort.sort(numerosParaSalvar);
                             break;
                     }
                     
-                    FileUtils.writeNumbersToFile(outputFilePath, numbersForSave);
-                    System.out.println("Arquivo de saida salvo em: " + outputFilePath);
+                    FileUtils.escreverNumerosNoArquivo(caminhoArquivoSaida, numerosParaSalvar);
+                    System.out.println("Arquivo de saida salvo em: " + caminhoArquivoSaida);
                     System.out.println();
                 }
                 System.out.println("\nProcesso concluido com sucesso!");
 
-                // Pergunta se deseja continuar
                 System.out.print("Deseja realizar outro teste? (s/n): ");
                 String resposta = scanner.next();
                 continuar = resposta.equalsIgnoreCase("s");
                 if (continuar) {
-                    clearScreen();
+                    limparTela();
                 }
 
             } catch (IOException e) {

@@ -10,81 +10,111 @@ import java.util.Random;
 
 public class DataGenerator {
 
-    private static void createFolder(String filename) {
-        File file = new File(filename);
-        File parentFolder = file.getParentFile();
-        if (parentFolder != null && !parentFolder.exists()) {
-            parentFolder.mkdirs();
+    /**
+     * Cria a pasta pai de um arquivo, se ela não existir.
+     * @param nomeArquivo O nome do arquivo cuja pasta pai será criada.
+     */
+    private static void criarPasta(String nomeArquivo) {
+        File arquivo = new File(nomeArquivo);   
+        File pastaPai = arquivo.getParentFile();
+        if (pastaPai != null && !pastaPai.exists()) {
+            pastaPai.mkdirs();
         }
     }
 
-    public static void generateRandomData(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
+    /**
+     * Gera números aleatórios e os grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosAleatorios(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
             Random random = new Random();
-            for (int i = 0; i < size; i++) {
-                writer.write(random.nextInt(size * 10) + "\n");
+            for (int i = 0; i < tamanho; i++) {
+                escritor.write(random.nextInt(tamanho * 10) + "\n");
             }
         }
     }
 
-    public static void generateIncreasingData(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
-            for (int i = 0; i < size; i++) {
-                writer.write(i + "\n");
+    /**
+     * Gera uma sequência de números crescentes sem repetição e a grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosCrescentes(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
+            for (int i = 0; i < tamanho; i++) {
+                escritor.write(i + "\n");
             }
         }
     }
 
-    public static void generateDecreasingData(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
-            for (int i = size - 1; i >= 0; i--) {
-                writer.write(i + "\n");
+    /**
+     * Gera uma sequência de números decrescentes sem repetição e a grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosDecrescentes(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
+            for (int i = tamanho - 1; i >= 0; i--) {
+                escritor.write(i + "\n");
             }
         }
     }
     
-    public static void generateRandomUniqueData(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
-            List<Integer> list = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                list.add(i);
+    /**
+     * Gera uma sequência de números aleatórios sem repetição e a grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosAleatoriosUnicos(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
+            List<Integer> lista = new ArrayList<>();
+            for (int i = 0; i < tamanho; i++) {
+                lista.add(i);
             }
-            Collections.shuffle(list);
-            for (Integer number : list) {
-                writer.write(number + "\n");
+            Collections.shuffle(lista);
+            for (Integer numero : lista) {
+                escritor.write(numero + "\n");
             }
         }
     }
     
-    // NOVO MÉTODO: Gera dados crescentes com repetição
-    public static void generateIncreasingDataWithRepetition(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
+    /**
+     * Gera uma sequência de números crescentes com repetição e a grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosCrescentesComRepeticao(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
             Random random = new Random();
-            int currentNumber = 0;
-            for (int i = 0; i < size; i++) {
-                // Adiciona um número aleatório pequeno para garantir repetição e um aumento gradual
-                currentNumber += random.nextInt(5); 
-                writer.write(currentNumber + "\n");
+            int numeroAtual = 0;
+            for (int i = 0; i < tamanho; i++) {
+                numeroAtual += random.nextInt(5); 
+                escritor.write(numeroAtual + "\n");
             }
         }
     }
 
-    // NOVO MÉTODO: Gera dados decrescentes com repetição
-    public static void generateDecreasingDataWithRepetition(String filename, int size) throws IOException {
-        createFolder(filename);
-        try (FileWriter writer = new FileWriter(filename)) {
+    /**
+     * Gera uma sequência de números decrescentes com repetição e a grava em um arquivo.
+     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
+     * @param tamanho A quantidade de números a serem gerados.
+     */
+    public static void gerarDadosDecrescentesComRepeticao(String nomeArquivo, int tamanho) throws IOException {
+        criarPasta(nomeArquivo);
+        try (FileWriter escritor = new FileWriter(nomeArquivo)) {
             Random random = new Random();
-            int currentNumber = size * 2; // Começa com um valor alto
-            for (int i = 0; i < size; i++) {
-                // Subtrai um número aleatório pequeno para garantir repetição e uma queda gradual
-                currentNumber -= random.nextInt(5);
-                if (currentNumber < 0) currentNumber = 0; // Evita números negativos
-                writer.write(currentNumber + "\n");
+            int numeroAtual = tamanho * 2; 
+            for (int i = 0; i < tamanho; i++) {
+                numeroAtual -= random.nextInt(5);
+                if (numeroAtual < 0) numeroAtual = 0;
+                escritor.write(numeroAtual + "\n");
             }
         }
     }
