@@ -1,6 +1,7 @@
 package src.algoritimos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class QuickSort {
     public static void sort(ArrayList<Integer> arr) {
@@ -16,7 +17,10 @@ public class QuickSort {
     }
 
     private static int partition(ArrayList<Integer> arr, int low, int high) {
+        // Implementação da Mediana de Três para escolher o pivô
+        medianOfThree(arr, low, high);
         int pivot = arr.get(high);
+        
         int i = (low - 1);
         for (int j = low; j < high; j++) {
             if (arr.get(j) <= pivot) {
@@ -30,5 +34,20 @@ public class QuickSort {
         arr.set(i + 1, arr.get(high));
         arr.set(high, temp);
         return i + 1;
+    }
+
+    private static void medianOfThree(ArrayList<Integer> arr, int low, int high) {
+        int mid = low + (high - low) / 2;
+        if (arr.get(mid) < arr.get(low)) {
+            Collections.swap(arr, low, mid);
+        }
+        if (arr.get(high) < arr.get(low)) {
+            Collections.swap(arr, low, high);
+        }
+        if (arr.get(high) < arr.get(mid)) {
+            Collections.swap(arr, mid, high);
+        }
+        // Coloca o pivô (agora na posição mid) no final para a partição
+        Collections.swap(arr, mid, high);
     }
 }
