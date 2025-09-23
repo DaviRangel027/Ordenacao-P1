@@ -11,9 +11,9 @@ import src.utils.DataGenerator;
 
 public class Main {
 
-    /**
-     * Limpa a tela do console, funcionando tanto em sistemas Windows quanto em Unix.
-     */
+    
+    //Limpa a tela do console
+     
     public static void limparTela() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // --- ALTERAÇÃO AQUI: Caminhos dinâmicos ---
+        // ---Caminhos dinâmicos---
         String homeDir = System.getProperty("user.home");
         String pastaBaseProjeto = homeDir + File.separator + "DadosOrdenacao";
         String pastaSaidaBase = pastaBaseProjeto + File.separator + "Saida" + File.separator;
