@@ -28,8 +28,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String pastaSaidaBase = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Saida\\";
-        String pastaEntradaBase = "C:\\Users\\Arthur - Home\\Desktop\\Dados\\Entrada\\";
+        
+        // --- ALTERAÇÃO AQUI: Caminhos dinâmicos ---
+        String homeDir = System.getProperty("user.home");
+        String pastaBaseProjeto = homeDir + File.separator + "DadosOrdenacao";
+        String pastaSaidaBase = pastaBaseProjeto + File.separator + "Saida" + File.separator;
+        String pastaEntradaBase = pastaBaseProjeto + File.separator + "Entrada" + File.separator;
+        // --- FIM DA ALTERAÇÃO ---
+        
         boolean continuar = true;
 
         do {
