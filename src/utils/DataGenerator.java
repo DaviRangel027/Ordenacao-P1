@@ -10,10 +10,7 @@ import java.util.Random;
 
 public class DataGenerator {
 
-    /**
-     * Cria a pasta pai de um arquivo, se ela não existir.
-     * @param nomeArquivo O nome do arquivo cuja pasta pai será criada.
-     */
+    
     private static void criarPasta(String nomeArquivo) {
         File arquivo = new File(nomeArquivo);   
         File pastaPai = arquivo.getParentFile();
@@ -22,11 +19,7 @@ public class DataGenerator {
         }
     }
 
-    /**
-     * Gera números aleatórios e os grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+  
     public static void gerarDadosAleatorios(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
@@ -37,11 +30,7 @@ public class DataGenerator {
         }
     }
 
-    /**
-     * Gera uma sequência de números crescentes sem repetição e a grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+  
     public static void gerarDadosCrescentes(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
@@ -51,11 +40,7 @@ public class DataGenerator {
         }
     }
 
-    /**
-     * Gera uma sequência de números decrescentes sem repetição e a grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+  
     public static void gerarDadosDecrescentes(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
@@ -65,11 +50,7 @@ public class DataGenerator {
         }
     }
     
-    /**
-     * Gera uma sequência de números aleatórios sem repetição e a grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+  
     public static void gerarDadosAleatoriosUnicos(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
@@ -84,11 +65,7 @@ public class DataGenerator {
         }
     }
     
-    /**
-     * Gera uma sequência de números crescentes com repetição e a grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+    
     public static void gerarDadosCrescentesComRepeticao(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
@@ -101,11 +78,7 @@ public class DataGenerator {
         }
     }
 
-    /**
-     * Gera uma sequência de números decrescentes com repetição e a grava em um arquivo.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param tamanho A quantidade de números a serem gerados.
-     */
+    
     public static void gerarDadosDecrescentesComRepeticao(String nomeArquivo, int tamanho) throws IOException {
         criarPasta(nomeArquivo);
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
