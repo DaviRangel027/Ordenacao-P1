@@ -8,11 +8,7 @@ import java.util.ArrayList;
 
 public class FileUtils {
 
-    /**
-     * Lê números inteiros de um arquivo e os retorna em uma lista.
-     * @param nomeArquivo O caminho do arquivo de onde os números serão lidos.
-     * @return Uma lista de inteiros contendo os números do arquivo.
-     */
+ 
     
     public static ArrayList<Integer> lerNumerosDoArquivo(String nomeArquivo) {
         ArrayList<Integer> numeros = new ArrayList<>();
@@ -32,11 +28,7 @@ public class FileUtils {
         return numeros;
     }
 
-    /**
-     * Grava uma lista de números inteiros em um arquivo, um número por linha.
-     * @param nomeArquivo O caminho do arquivo onde os números serão gravados.
-     * @param numeros A lista de inteiros a ser gravada no arquivo.
-     */
+  
     public static void escreverNumerosNoArquivo(String nomeArquivo, ArrayList<Integer> numeros) {
         try (FileWriter escritor = new FileWriter(nomeArquivo)) {
             for (Integer numero : numeros) {
