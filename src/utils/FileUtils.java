@@ -15,7 +15,6 @@ public class FileUtils {
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                // Tenta adicionar o número à lista após remover espaços em branco
                 numeros.add(Integer.parseInt(linha.trim()));
             }
         } catch (IOException e) {
