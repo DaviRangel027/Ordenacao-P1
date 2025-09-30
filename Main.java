@@ -12,7 +12,6 @@ import src.utils.DataGenerator;
 public class Main {
 
     
-    //Limpa a tela do console
      
     public static void limparTela() {
         try {
@@ -22,19 +21,16 @@ public class Main {
                 new ProcessBuilder("clear").inheritIO().start().waitFor();
             }
         } catch (IOException | InterruptedException ex) {
-            // Ignora a exceção se a limpeza do console falhar
         }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // ---Caminhos dinâmicos---
         String homeDir = System.getProperty("user.home");
         String pastaBaseProjeto = homeDir + File.separator + "DadosOrdenacao";
         String pastaSaidaBase = pastaBaseProjeto + File.separator + "Saida" + File.separator;
         String pastaEntradaBase = pastaBaseProjeto + File.separator + "Entrada" + File.separator;
-        // --- FIM DA ALTERAÇÃO ---
         
         boolean continuar = true;
 
@@ -44,7 +40,6 @@ public class Main {
                 String[] tipos = {"Aleatorio com repeticao", "Aleatorio sem repeticao", "Crescente com repeticao", "Crescente sem repeticao", "Decrescente com repeticao", "Decrescente sem repeticao"};
 
                 int escolhaTipo = 0;
-                // Validação da escolha do tipo de dado
                 do {
                     System.out.println("Escolha o tipo de dado para a ordenacao:");
                     for (int i = 0; i < tipos.length; i++) {
@@ -58,13 +53,12 @@ public class Main {
                         }
                     } catch (InputMismatchException e) {
                         System.out.println("Entrada invalida. Por favor, digite apenas numeros.");
-                        scanner.next(); // Limpa o buffer
+                        scanner.next(); 
                     }
                 } while (escolhaTipo < 1 || escolhaTipo > tipos.length);
                 scanner.nextLine();
 
                 int escolhaTamanho = 0;
-                // Validação da escolha da quantidade de números
                 do {
                     System.out.println("\nEscolha a quantidade de numeros a serem ordenados:");
                     for (int i = 0; i < tamanhos.length; i++) {
@@ -78,7 +72,7 @@ public class Main {
                         }
                     } catch (InputMismatchException e) {
                         System.out.println("Entrada invalida. Por favor, digite apenas numeros.");
-                        scanner.next(); // Limpa o buffer
+                        scanner.next(); 
                     }
                 } while (escolhaTamanho < 1 || escolhaTamanho > tamanhos.length);
                 scanner.nextLine();

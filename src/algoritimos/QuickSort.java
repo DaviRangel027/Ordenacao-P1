@@ -47,7 +47,6 @@ public class QuickSort {
         if (arr.get(high) < arr.get(mid)) {
             Collections.swap(arr, mid, high);
         }
-        // Coloca o pivô (agora na posição mid) no final para a partição
         Collections.swap(arr, mid, high);
     }
 }
